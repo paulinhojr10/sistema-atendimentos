@@ -3,111 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sistema de Gestão de Atendimentos</title>
+  <title>SGA - Sprint 04 Final</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="shell">
+  <div class="app">
     <aside class="sidebar">
-      <h1>SGA</h1>
-      <nav>
-        <button class="nav-btn active" data-view="dashboard">Dashboard</button>
-        <button class="nav-btn" data-view="cadastro">Cadastro</button>
-        <button class="nav-btn" data-view="atendimentos">Atendimentos</button>
-        <button class="nav-btn" data-view="lista">Listagem</button>
-      </nav>
+      <div class="brand">SGA</div>
+      <div class="subtitle">SPRINT 04</div>
+
+      <button class="nav-btn active" data-target="dashboard">Dashboard</button>
+      <button class="nav-btn" data-target="cadastro">Cadastro</button>
+      <button class="nav-btn" data-target="atendimentos">Atendimentos</button>
+      <button class="nav-btn" data-target="listagem">Listagem</button>
+      <button class="nav-btn" data-target="relatorio">Relatório Final</button>
     </aside>
 
     <main class="content">
-      <section id="loginBox" class="card login-card">
-        <h2>Acesso ao sistema</h2>
-        <p>Use qualquer nome de usuário e a senha <strong>1234</strong>.</p>
-        <form id="loginForm" class="grid">
-          <label>
-            Usuário
-            <input type="text" id="usuario" placeholder="Digite seu nome" required />
-          </label>
-          <label>
-            Senha
-            <input type="password" id="senha" placeholder="1234" required />
-          </label>
-          <button type="submit">Entrar</button>
-        </form>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">VERSÃO FINAL DO MVP</p>
+          <h1>Sistema de Gestão de Atendimentos</h1>
+        </div>
+        <div class="top-actions">
+          <button class="secondary" id="popularDemo">Popular demonstração</button>
+          <button class="danger" id="resetDados">Limpar dados</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="page active">
+        <div class="cards">
+          <div class="card metric">
+            <span>Total de pessoas</span>
+            <strong id="metricPessoas">0</strong>
+          </div>
+          <div class="card metric">
+            <span>Total de atendimentos</span>
+            <strong id="metricAtendimentos">0</strong>
+          </div>
+          <div class="card metric">
+            <span>Pessoas ativas</span>
+            <strong id="metricAtivos">0</strong>
+          </div>
+          <div class="card metric">
+            <span>Encaminhamentos</span>
+            <strong id="metricEncaminhamentos">0</strong>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <h3>Últimos cadastros</h3>
+            <div id="ultimosCadastros" class="stack"></div>
+          </div>
+          <div class="card">
+            <h3>Últimos atendimentos</h3>
+            <div id="ultimosAtendimentos" class="stack"></div>
+          </div>
+        </div>
       </section>
 
-      <div id="app" class="hidden">
-        <header class="topbar">
-          <div>
-            <p class="eyebrow">Projeto Extensionista</p>
-            <h2>Sistema de Gestão de Atendimentos</h2>
+      <section id="cadastro" class="page">
+        <div class="card">
+          <h3>Cadastro de pessoas</h3>
+          <form id="formPessoa" class="form-grid">
+            <input type="hidden" id="pessoaId" />
+            <div>
+              <label>Nome completo</label>
+              <input id="nome" type="text" placeholder="Digite o nome completo" />
+            </div>
+            <div>
+              <label>Documento / matrícula</label>
+              <input id="documento" type="text" placeholder="Ex.: 62985369812 - ADS" />
+            </div>
+            <div>
+              <label>Status</label>
+              <select id="statusPessoa">
+                <option value="Ativo">Ativo</option>
+                <option value="Em revisão">Em revisão</option>
+                <option value="Inativo">Inativo</option>
+              </select>
+            </div>
+            <div>
+              <label>Contato</label>
+              <input id="contatoPessoa" type="text" placeholder="Telefone ou e-mail" />
+            </div>
+            <div class="full">
+              <label>Observação</label>
+              <textarea id="obsPessoa" placeholder="Informações complementares"></textarea>
+            </div>
+            <div class="actions full">
+              <button type="submit" class="primary">Salvar cadastro</button>
+              <button type="button" class="secondary" id="cancelarPessoa">Cancelar edição</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="atendimentos" class="page">
+        <div class="card">
+          <h3>Registro de atendimentos</h3>
+          <form id="formAtendimento" class="form-grid">
+            <input type="hidden" id="atendimentoId" />
+            <div>
+              <label>Pessoa cadastrada</label>
+              <select id="pessoaAtendimento"></select>
+            </div>
+            <div>
+              <label>Tipo de atendimento</label>
+              <select id="tipoAtendimento">
+                <option value="Orientação">Orientação</option>
+                <option value="Acompanhamento">Acompanhamento</option>
+                <option value="Encaminhamento">Encaminhamento</option>
+              </select>
+            </div>
+            <div>
+              <label>Responsável</label>
+              <input id="responsavel" type="text" placeholder="Nome do responsável" />
+            </div>
+            <div>
+              <label>Data</label>
+              <input id="dataAtendimento" type="date" />
+            </div>
+            <div class="full">
+              <label>Descrição</label>
+              <textarea id="descricaoAtendimento" placeholder="Descreva o atendimento realizado"></textarea>
+            </div>
+            <div class="actions full">
+              <button type="submit" class="primary">Salvar atendimento</button>
+              <button type="button" class="secondary" id="cancelarAtendimento">Cancelar edição</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="listagem" class="page">
+        <div class="grid filters">
+          <div class="card">
+            <label>Buscar por nome, documento ou descrição</label>
+            <input id="busca" type="text" placeholder="Digite para filtrar resultados" />
           </div>
-          <button id="logoutBtn" class="ghost">Sair</button>
-        </header>
-
-        <section id="dashboard" class="view">
-          <div class="stats">
-            <article class="card stat">
-              <span>Total de cadastrados</span>
-              <strong id="totalPessoas">0</strong>
-            </article>
-            <article class="card stat">
-              <span>Total de atendimentos</span>
-              <strong id="totalAtendimentos">0</strong>
-            </article>
-            <article class="card stat">
-              <span>Último atendimento</span>
-              <strong id="ultimoAtendimento">Nenhum</strong>
-            </article>
+          <div class="card">
+            <label>Filtrar status</label>
+            <select id="filtroStatus">
+              <option value="Todos">Todos</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Em revisão">Em revisão</option>
+              <option value="Inativo">Inativo</option>
+            </select>
           </div>
-          <article class="card">
-            <h3>Resumo da Sprint 01</h3>
-            <p>Base do MVP criada com login simples, painel principal, cadastro e registro de atendimentos usando armazenamento local.</p>
-          </article>
-        </section>
+        </div>
 
-        <section id="cadastro" class="view hidden">
-          <article class="card">
-            <h3>Cadastro de atendido</h3>
-            <form id="cadastroForm" class="grid two">
-              <label>Nome completo<input type="text" id="nome" required /></label>
-              <label>Telefone<input type="text" id="telefone" required /></label>
-              <label>Curso/Setor<input type="text" id="curso" required /></label>
-              <label>Status<select id="status"><option>Ativo</option><option>Em acompanhamento</option></select></label>
-              <label class="full">Observações<textarea id="observacoes" rows="4"></textarea></label>
-              <button type="submit">Salvar cadastro</button>
-            </form>
-          </article>
-        </section>
-
-        <section id="atendimentos" class="view hidden">
-          <article class="card">
-            <h3>Registro de atendimento</h3>
-            <form id="atendimentoForm" class="grid two">
-              <label>Atendido<select id="pessoaSelect" required></select></label>
-              <label>Data<input type="date" id="dataAtendimento" required /></label>
-              <label>Tipo<select id="tipoAtendimento"><option>Orientação</option><option>Acompanhamento</option><option>Suporte</option></select></label>
-              <label>Responsável<input type="text" id="responsavel" value="Paulo Júnior" required /></label>
-              <label class="full">Descrição<textarea id="descricaoAtendimento" rows="4" required></textarea></label>
-              <button type="submit">Salvar atendimento</button>
-            </form>
-          </article>
-        </section>
-
-        <section id="lista" class="view hidden">
-          <div class="grid two">
-            <article class="card">
-              <h3>Pessoas cadastradas</h3>
-              <div id="listaPessoas"></div>
-            </article>
-            <article class="card">
-              <h3>Atendimentos registrados</h3>
-              <div id="listaAtendimentos"></div>
-            </article>
+        <div class="grid two">
+          <div class="card">
+            <h3>Pessoas cadastradas</h3>
+            <div id="listaPessoas" class="stack"></div>
           </div>
-        </section>
-      </div>
+          <div class="card">
+            <h3>Atendimentos registrados</h3>
+            <div id="listaAtendimentos" class="stack"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="relatorio" class="page">
+        <div class="grid two">
+          <div class="card">
+            <h3>Resumo do MVP</h3>
+            <ul class="summary-list">
+              <li>Cadastro de pessoas</li>
+              <li>Registro de atendimentos</li>
+              <li>Edição e exclusão de registros</li>
+              <li>Filtros de busca e status</li>
+              <li>Dashboard com indicadores</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Observações finais</h3>
+            <p class="muted-text">
+              Esta versão final consolida as melhorias das sprints anteriores e apresenta uma interface
+              mais estável, organizada e pronta para demonstração acadêmica.
+            </p>
+            <button class="primary" id="baixarResumo">Baixar resumo em TXT</button>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

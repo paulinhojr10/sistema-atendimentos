@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Gestão de Atendimentos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <h1>SGA</h1>
+      <nav>
+        <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+        <button class="nav-btn" data-view="cadastro">Cadastro</button>
+        <button class="nav-btn" data-view="atendimentos">Atendimentos</button>
+        <button class="nav-btn" data-view="lista">Listagem</button>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section id="loginBox" class="card login-card">
+        <h2>Acesso ao sistema</h2>
+        <p>Use qualquer nome de usuário e a senha <strong>1234</strong>.</p>
+        <form id="loginForm" class="grid">
+          <label>
+            Usuário
+            <input type="text" id="usuario" placeholder="Digite seu nome" required />
+          </label>
+          <label>
+            Senha
+            <input type="password" id="senha" placeholder="1234" required />
+          </label>
+          <button type="submit">Entrar</button>
+        </form>
+      </section>
+
+      <div id="app" class="hidden">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Projeto Extensionista</p>
+            <h2>Sistema de Gestão de Atendimentos</h2>
+          </div>
+          <button id="logoutBtn" class="ghost">Sair</button>
+        </header>
+
+        <section id="dashboard" class="view">
+          <div class="stats">
+            <article class="card stat">
+              <span>Total de cadastrados</span>
+              <strong id="totalPessoas">0</strong>
+            </article>
+            <article class="card stat">
+              <span>Total de atendimentos</span>
+              <strong id="totalAtendimentos">0</strong>
+            </article>
+            <article class="card stat">
+              <span>Último atendimento</span>
+              <strong id="ultimoAtendimento">Nenhum</strong>
+            </article>
+          </div>
+          <article class="card">
+            <h3>Resumo da Sprint 01</h3>
+            <p>Base do MVP criada com login simples, painel principal, cadastro e registro de atendimentos usando armazenamento local.</p>
+          </article>
+        </section>
+
+        <section id="cadastro" class="view hidden">
+          <article class="card">
+            <h3>Cadastro de atendido</h3>
+            <form id="cadastroForm" class="grid two">
+              <label>Nome completo<input type="text" id="nome" required /></label>
+              <label>Telefone<input type="text" id="telefone" required /></label>
+              <label>Curso/Setor<input type="text" id="curso" required /></label>
+              <label>Status<select id="status"><option>Ativo</option><option>Em acompanhamento</option></select></label>
+              <label class="full">Observações<textarea id="observacoes" rows="4"></textarea></label>
+              <button type="submit">Salvar cadastro</button>
+            </form>
+          </article>
+        </section>
+
+        <section id="atendimentos" class="view hidden">
+          <article class="card">
+            <h3>Registro de atendimento</h3>
+            <form id="atendimentoForm" class="grid two">
+              <label>Atendido<select id="pessoaSelect" required></select></label>
+              <label>Data<input type="date" id="dataAtendimento" required /></label>
+              <label>Tipo<select id="tipoAtendimento"><option>Orientação</option><option>Acompanhamento</option><option>Suporte</option></select></label>
+              <label>Responsável<input type="text" id="responsavel" value="Paulo Júnior" required /></label>
+              <label class="full">Descrição<textarea id="descricaoAtendimento" rows="4" required></textarea></label>
+              <button type="submit">Salvar atendimento</button>
+            </form>
+          </article>
+        </section>
+
+        <section id="lista" class="view hidden">
+          <div class="grid two">
+            <article class="card">
+              <h3>Pessoas cadastradas</h3>
+              <div id="listaPessoas"></div>
+            </article>
+            <article class="card">
+              <h3>Atendimentos registrados</h3>
+              <div id="listaAtendimentos"></div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
